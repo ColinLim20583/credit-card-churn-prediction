@@ -17,7 +17,7 @@ from sklearn.metrics import recall_score, roc_auc_score, classification_report
 from preprocess import preprocess_pipeline
 
 
-DATA_PATH = "../data/BankChurners.csv.xls"
+DATA_PATH = "../data/BankChurners.csv"
 MODEL_SAVE_PATH = "../models/best_model.pkl"
 
 
@@ -29,7 +29,7 @@ def get_models() -> dict:
         "Random Forest": RandomForestClassifier(n_estimators=100, random_state=42),
         "AdaBoost": AdaBoostClassifier(random_state=42),
         "Gradient Boosting": GradientBoostingClassifier(random_state=42),
-        "XGBoost": XGBClassifier(use_label_encoder=False, eval_metric="logloss", random_state=42),
+        "XGBoost": XGBClassifier(eval_metric="logloss", random_state=42),
     }
 
 
@@ -57,8 +57,8 @@ def tune_xgboost(X_train, y_train) -> XGBClassifier:
         "learning_rate": [0.05, 0.1],
         "subsample": [0.8, 1.0],
     }
-    xgb = XGBClassifier(use_label_encoder=False, eval_metric="logloss", random_state=42)
-    grid_search = GridSearchCV(xgb, param_grid, cv=3, scoring="recall", n_jobs=-1, verbose=1)
+    xgb = XGBClassifier(eval_metric="logloss", random_state=42)
+    grid_search = GridSearchCV(xgb, param_grid, cv=3, scoring="recall", n_jobs=1, verbose=1)
     grid_search.fit(X_train, y_train)
     print(f"\nBest XGBoost params: {grid_search.best_params_}")
     return grid_search.best_estimator_

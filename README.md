@@ -13,7 +13,7 @@ Customer churn is one of the most costly problems in banking. Acquiring a new cu
 ## 📊 Dataset
 
 - **Source:** Thera Bank Credit Card Customer Dataset
-- **Size:** ~10,000 customers, 21 features
+- **Size:** 10,127 customers, 21 features
 - **Target variable:** `Attrition_Flag` (Existing Customer / Attrited Customer)
 - **Class imbalance:** ~84% existing, ~16% churned
 
@@ -41,14 +41,14 @@ Customer churn is one of the most costly problems in banking. Acquiring a new cu
 
 ### 3. Models Trained & Compared
 
-| Model | Recall (Churn) | AUC |
+| Model | Recall | AUC |
 |---|---|---|
-| Logistic Regression | ~72% | ~0.83 |
-| Decision Tree | ~78% | ~0.87 |
-| Random Forest | ~83% | ~0.93 |
-| AdaBoost | ~80% | ~0.92 |
-| Gradient Boosting | ~84% | ~0.94 |
-| **XGBoost** | **~88%** | **~0.96** |
+| Logistic Regression | 0.6781 | 0.8713 |
+| Decision Tree | 0.8206 | 0.8809 |
+| Random Forest | 0.8526 | 0.9814 |
+| AdaBoost | 0.8452 | 0.9583 |
+| Gradient Boosting | 0.8722 | 0.9856 |
+| **XGBoost** | **0.8771** | **0.9915** |
 
 ### 4. Hyperparameter Tuning
 - Grid Search CV used on top models
@@ -60,10 +60,50 @@ Customer churn is one of the most costly problems in banking. Acquiring a new cu
 
 **Best Model: XGBoost (with SMOTE)**
 
-- **Recall (Churn class):** ~88%
-- **Precision:** ~85%
-- **F1-Score:** ~86%
-- **ROC-AUC:** ~0.96
+- **Recall (Churn class):** 87.71%
+- **Precision:** 90.00%
+- **F1-Score:** 89.00%
+- **Accuracy:** 97.00%
+- **ROC-AUC:** 99.15%
+
+---
+
+## 💾 Saved Model
+
+The best-performing XGBoost model is saved as:
+
+```text
+models/best_model.pkl
+```
+
+This model can be loaded and used for future customer churn predictions without retraining.
+
+---
+
+## 📈 Model Evaluation
+
+### Confusion Matrix
+
+![Confusion Matrix](images/confusion_matrix.png)
+
+### ROC Curve
+
+![ROC Curve](images/roc_curve.png)
+
+### Feature Importance
+
+![Feature Importance](images/feature_importance.png)
+
+---
+
+## ⚙️ Best XGBoost Parameters
+
+```text
+learning_rate: 0.05
+max_depth: 7
+n_estimators: 200
+subsample: 0.8
+```
 
 ---
 
@@ -94,22 +134,23 @@ Customer churn is one of the most costly problems in banking. Acquiring a new cu
 
 ## 📁 Project Structure
 
-```
+```text
 credit-card-churn-prediction/
 │
 ├── data/
-│   └── README.md                  # Dataset description & source
+│   └── BankChurners.csv
 │
-├── notebooks/
-│   └── churn_prediction.ipynb     # Full analysis notebook
+├── notebook/
+│   └── credit_card_churn_prediction.ipynb
 │
 ├── src/
-│   ├── preprocess.py              # Data cleaning & encoding
-│   ├── train.py                   # Model training pipeline
-│   └── evaluate.py                # Evaluation metrics & plots
+│   ├── preprocess.py
+│   ├── train.py
+│   ├── evaluate.py
+│   └── generate_plots.py
 │
 ├── models/
-│   └── README.md                  # Saved model info
+│   └── best_model.pkl
 │
 ├── images/
 │   ├── feature_importance.png
@@ -117,6 +158,7 @@ credit-card-churn-prediction/
 │   └── roc_curve.png
 │
 ├── requirements.txt
+├── LICENSE
 └── README.md
 ```
 
@@ -126,7 +168,7 @@ credit-card-churn-prediction/
 
 **1. Clone the repository**
 ```bash
-git clone https://github.com/yourusername/credit-card-churn-prediction.git
+git clone https://github.com/ColinLim20583/credit-card-churn-prediction.git
 cd credit-card-churn-prediction
 ```
 
@@ -137,7 +179,7 @@ pip install -r requirements.txt
 
 **3. Run the notebook**
 ```bash
-jupyter notebook notebooks/churn_prediction.ipynb
+jupyter notebook notebook/credit_card_churn_prediction.ipynb
 ```
 
 **4. Or run training script directly**
@@ -155,6 +197,6 @@ This project is open source under the [MIT License](LICENSE).
 
 ## 👤 Author
 
-**[Your Name]**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
+**Colin Lim**
+- GitHub: [ColinLim20583](https://github.com/ColinLim20583)
+- LinkedIn: [Colin Lim](https://www.linkedin.com/in/colin-lim1983/)
