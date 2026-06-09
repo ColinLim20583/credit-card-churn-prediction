@@ -1,7 +1,32 @@
-.idea/
-__pycache__/
+# Data files (too large for GitHub)
+data/*.csv
+data/*.xlsx
+
+# Saved models
+models/*.pkl
+models/*.joblib
+
+# Jupyter checkpoints
 .ipynb_checkpoints/
-*.pyc
+**/.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+venv/
+env/
 .env
-.venv
-data/raw/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
